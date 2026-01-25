@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Delightful Bites | Artisanal Bakery &amp; Snacks</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8B4513", // Saddle Brown
+            accent: "#E6B17E", // Warm Peach
+            "background-light": "#FFFDF5", // Soft Cream
+            "background-dark": "#1A1614", // Deep Chocolate Black
+             "whatsapp": "#25D366",
+             "sale-red": "#EF4444",
+          },
+          fontFamily: {
+            display: ["Playfair Display", "serif"],
+            sans: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            "xl": "1rem",
+          },
+        },
+      },
+    };
+  </script>
+  <script defer src="main.js"></script>
+  <style>
+    .hero-gradient {
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    }
+     #sales-modal:target {
+        display: flex;
+      }
+  </style>
+</head>
+
+<body class="font-sans bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-200 transition-colors duration-300">
+  <nav class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-stone-200 dark:border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-primary text-3xl">bakery_dining</span>
+          <span class="font-display text-2xl font-bold text-primary italic">Delightful Bites</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a class="hover:text-primary transition-colors font-medium" href="#">Home</a>
+          <a class="hover:text-primary transition-colors font-medium" href="#gallery">Menu</a>
+          <a class="hover:text-primary transition-colors font-medium" href="#reviews">Reviews</a>
+          <a class="hover:text-primary transition-colors font-medium" href="#">Contact</a>
+          <button class="p-2 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+            <span class="material-icons dark:hidden">dark_mode</span>
+            <span class="material-icons hidden dark:block">light_mode</span>
+          </button>
+          <a class="bg-whatsapp text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition-opacity" href="#sales-modal">Purchase Website</a>
+        </div>
+        <div class="md:hidden flex items-center gap-4">
+          <button class="p-2 rounded-full" onclick="document.documentElement.classList.toggle('dark')">
+            <span class="material-icons dark:hidden">dark_mode</span>
+            <span class="material-icons hidden dark:block">light_mode</span>
+          </button>
+          <span class="material-icons text-3xl">menu</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <section class="relative h-[600px] overflow-hidden">
+    <div class="absolute inset-0">
+      <img alt="Freshly baked bread" class="w-full h-full object-cover" src="/pics/header.png" />
+      <div class="absolute inset-0 hero-gradient"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center text-white">
+      <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Artisanal Treats for Every Moment</h1>
+      <p class="text-xl md:text-2xl max-w-2xl mb-8 font-light drop-shadow-md">Handcrafted cakes, pastries, and snacks made with love and the finest local ingredients.</p>
+      <div class="flex gap-4">
+        <a class="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform" href="#gallery">Explore Menu</a>
+        <a class="bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/30 transition-all" href="#story">Our Story</a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-20 bg-stone-50 dark:bg-stone-900/50" id="gallery">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-display text-4xl font-bold text-stone-900 dark:text-stone-100 mb-4">Our Signature Creations</h2>
+        <div class="flex justify-center gap-4 text-stone-500 dark:text-stone-400 font-medium overflow-x-auto pb-2">
+          <button data-filter="cakes" class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-primary transition-colors">Cakes</button>
+          <button data-filter="pastries" class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-primary transition-colors">Pastries</button>
+          <button data-filter="snacks" class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-primary transition-colors">Snacks</button>
+        </div>
+      </div>
+      <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div data-category="cakes" class="product-card group bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+          <div class="h-64 overflow-hidden">
+            <img alt="Chocolate Fudge Cake" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxmSGPEnRGwTIh0n2ulihdsAjX78eZYnBqu8DM1E1kk5AwaF_0JTZGGlYlJEW_kMwfWUet7S2nIRsOKCAGQf8l5TWx846VGJeJ1uNyesqg9r1B0r2LMF8Vg_GEHJBwoNh7oYS0EyArwZtfNkDmHhtDINMImJwq2o71zeJYTIedHUD6fSqNv-hdO6-Bb-OwbxO4i-9GJw4NY0-M4G4UHvsb7EFR8LGvE8PNrsbh9np40YPUVRYduxSVMFjCkMLRCIp3BuWTcRzSMtTO" />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-display font-bold">Midnight Truffle Cake</h3>
+              <span class="text-primary font-bold font-sans">₦4,500 - ₦8,500</span>
+            </div>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-4">Layers of dark Belgian chocolate ganache and moist sponge.</p>
+            <button class="w-full py-2 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">View Details</button>
+          </div>
+        </div>
+        <div data-category="cakes" class="product-card group bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+          <div class="h-64 overflow-hidden">
+            <img alt="Artisan Croissants" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxmw83gXJfpAmMtuGKs8HTNT9YvWPV-tD8yX7IjDUWVF-P0m8Wa1wHtgrco7Rdyx6SF0WBH5gyzekmg9RNXCHs-52b3yMaAmPaMr1v90lliNgw9PZFacZ3M1a9r5A7EoIKLqpwzEjHy_5Q9aby6kfuoh0dMcsNstWXfZLTppUo57t-jzSsiOZ41_RAA42X52ziiq60a7STk9OaTNIaXD1b1LVSDIv-ylQ0du0tymBr_E4B96Pc1pIz9zpJvtGlXSgEzqt2H8Pwqbr5" />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-display font-bold">Butter Croissant Box</h3>
+              <span class="text-primary font-bold font-sans">₦2,400 - ₦4,000</span>
+            </div>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-4">Flaky, buttery perfection baked fresh every single morning.</p>
+            <button class="w-full py-2 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">View Details</button>
+          </div>
+        </div>
+        <div data-category="pastries" class="product-card group bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+          <div class="h-64 overflow-hidden">
+            <img alt="Fruit Tart" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH6wy5NklIcByZ9dghcw8lOD6fWITbQgtl3jNJup675-kJNAOlfNAaqOsFcLhng4-FhQqCqImey70R1S1i19x6dK4BrA7kWfL0i6KRWpquVhFjTrIePcJyDdYyVh9RMKhuUg5YkLmogSM_x6Bd6SYBrMcrMo_BPJtLchJJl8UyavezHcfH9LZEApWl98MMjBKw-YSAuZKIooqsioJv4crHRxUkFVySmnwlN6bHQPilvesHzlHcHNjXt1zYNw1p6cGxYofmfh_kR1pR" />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-display font-bold">Summer Berry Tart</h3>
+              <span class="text-primary font-bold font-sans">₦3,500 - ₦6,000</span>
+            </div>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-4">Crisp shortcrust with vanilla cream and seasonal berries.</p>
+            <button class="w-full py-2 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">View Details</button>
+          </div>
+        </div>
+        <div data-category="snacks" class="product-card group bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+          <div class="h-64 overflow-hidden">
+            <img alt="Assorted Cookies" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKPBLPAGWdygfixDWGU7Dp-qyLXre-BvbKBcDUNODbfFiX6Rq9z7plkw0F8Pkhnczb1eLh5WwnDcAtqgQ6F2J1vz96lSihXBKXCTl1qAmvN51Uc0ESLXea-Jp9nIt6Dd8ao55HtmMsDCj8aQWMycN9JBNRaikcKM9F2Hdk-Q0Av5zWxno25HpMphO7Bzi24DyLabIzSy9sjvp_oM2ijdyEj8nRiJkWm1udUQtFOddR_-hsBumN4P8BC7pgr2b52EsmLP6ibilfSgKa" />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-display font-bold">Signature Cookie Tin</h3>
+              <span class="text-primary font-bold font-sans">₦1,800 - ₦3,500</span>
+            </div>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-4">A curated selection of our best-selling chunky cookies.</p>
+            <button class="w-full py-2 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">View Details</button>
+          </div>
+        </div>
+        <div data-category="pastries" class="product-card group bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+          <div class="h-64 overflow-hidden">
+            <img alt="Macarons" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvuOLKQIhAOGOJEgs21SM5ezXXJQHjcykMiU4K9j6W0XtJbDoDHmi1XxgjJ24IEuh5WqB7ddeWAgogtFDDp19k5Efk3QWm05XbRFqEZtbnvAfztaMYxxX9oZ7fCb_NhNQG3bivXvP-s9oYRzwI7ZycsSgHlTm7c7R4ZymOCXfBVbJ3wsah8NwE6TqQSgftdXcvxhqT0APB3VI2Re5vAX8yvsMTrj1HHIY73RPYbl8c3UgrUZ81zim8hfWd4BnQGKlLyF0u6CLhDIy9" />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-display font-bold">Parisian Macarons</h3>
+              <span class="text-primary font-bold font-sans">₦2,500 - ₦4,500</span>
+            </div>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-4">Delicate almond shells with light, flavorful meringue filling.</p>
+            <button class="w-full py-2 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">View Details</button>
+          </div>
+        </div>
+        <div data-category="snacks" class="product-card group bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+          <div class="h-64 overflow-hidden">
+            <img alt="Savory Pies" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlb7s6P69ictXtMIVeboO43JI8sgpjA6spe_aZmff8nYl_nXkAp2NGqH0--D1eukUZD4CKpo-o34suBuSd6hN6_SWSwflJ_CpxWNh7KJIv6twT0t7PAIyDCx9ulgdgM32dXgdo4UyJ8WsVYvIGu4R4z5FWSzYDU2HoVuqr12NvSrry9_bJrrkDY_-Stqv-zRDls_Xe34Q3E732B_cM5z2IIqyv5fnlSSg533gOtB5HLvwmxBq-fKUf7QXX2mpaPmE3k_DbyXbIv3uW" />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-display font-bold">Artisan Savory Pies</h3>
+              <span class="text-primary font-bold font-sans">₦1,200 - ₦2,500</span>
+            </div>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-4">Hearty fillings wrapped in our signature buttery pastry.</p>
+            <button class="w-full py-2 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">View Details</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-24 bg-background-light dark:bg-background-dark overflow-hidden" id="story">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="relative group">
+          <div class="absolute -inset-4 bg-accent/20 rounded-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500"></div>
+          <div class="relative rounded-xl overflow-hidden shadow-2xl">
+            <img alt="Bakers at work in our kitchen" class="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBwHY3BvsBttVxIbQvzaf3pWm0xvEdZQdFGq7uwoJKFntN3eVVjaAp3reuleN5PnC5aYbn40rKeYeVxbFVlSIrekT9GyUalYL3MFih2GjUx28aBJ2Ix0uvqf0D0zpVWAj9y1Ls6Rh-DILUzq0_fbUirDib0rAQ63Dljs5bDyrVQtlZMXv1d-19p2dO23WtJceL3k0eHsbLdA3GNGmq_B3dPXLxWfpM2PMw6_HVTGO6gGb9qgWAXBMDvwSq0engYg42Pubu8WXqNpzA" />
+          </div>
+          <div class="absolute -bottom-6 -right-6 bg-white dark:bg-stone-800 p-6 rounded-lg shadow-xl hidden md:block">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-4xl">workspace_premium</span>
+              <div>
+                <p class="text-sm font-bold uppercase tracking-wider text-primary">Award Winning</p>
+                <p class="text-xs text-stone-500 dark:text-stone-400">Best Local Bakery 2023</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-8">
+          <div class="inline-block">
+            <span class="text-primary font-bold tracking-[0.2em] uppercase text-sm border-b-2 border-accent pb-1">Our Heritage</span>
+          </div>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 leading-tight">Crafting Sweet Moments Since 2010</h2>
+          <div class="space-y-6 text-lg text-stone-600 dark:text-stone-400 leading-relaxed font-light">
+            <p>
+              What started as a small family oven in a tiny kitchen has grown into the heart of Sweetwater Valley. For over a decade, Delightful Bites has been more than just a bakery; it's a place where memories are baked daily. Our journey began with a simple philosophy: use the best ingredients, treat every customer like family, and never rush the rising process.
+            </p>
+            <p>
+              We take pride in our commitment to sourcing from local farmers. From the organic flour milled nearby to the seasonal berries picked at dawn, every element of our creations tells a story of community and quality. Our passion for baking is reflected in every flaky layer of our croissants and every delicate crumb of our signature cakes.
+            </p>
+          </div>
+          <div class="pt-4 flex flex-wrap gap-8">
+            <div class="flex flex-col">
+              <span class="text-3xl font-display font-bold text-primary">100%</span>
+              <span class="text-sm text-stone-500 uppercase tracking-wide">Natural Ingredients</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-3xl font-display font-bold text-primary">Fresh</span>
+              <span class="text-sm text-stone-500 uppercase tracking-wide">Baked Every Morning</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-3xl font-display font-bold text-primary">Local</span>
+              <span class="text-sm text-stone-500 uppercase tracking-wide">Sourced Produce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-20" id="reviews">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-display text-4xl font-bold mb-12">Happy Customers</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="flex flex-col items-center">
+          <div class="mb-6">
+            <img alt="Sarah J." class="w-20 h-20 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAzElwg523_aDv5Hs2MXsfY-YLBmQgqRIWor5PemKZzmzl4xqhpriBfFoBrexdscqNPjsuhUg40Z_7080CyR0lHZib_sqz1KFGL-HVRRIV-r0CF4WfcCPcTLGfI5MxF29DNAw1d_nFPkBvDXCLekf_oF0QBnsNeUHemzuAIQp6A2bPZpvg9DqiA69WT-Gm5eeq6vCuR9zcoFJZR-x2p2kbnV4qZ1Pf-HoxQId5Cj_lFa3VDZsZHxHLuEL2ttC5jY--vg0S7Q1rQXaA" />
+          </div>
+          <div class="flex text-yellow-500 mb-4">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+          </div>
+          <p class="italic text-stone-600 dark:text-stone-400 mb-4 leading-relaxed">"The Midnight Truffle cake was the highlight of our wedding anniversary. Absolutely divine and not too sweet!"</p>
+          <span class="font-bold text-stone-900 dark:text-stone-100">— Sarah Jenkins</span>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="mb-6">
+            <img alt="David M." class="w-20 h-20 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbVy1hEYT8z3L9bRSqgLz6k2gm4r7PGyWM24apycGCdJQ006zlhzvw1lUJUANieGkdvWoN94xrQ26JJpntr-7lWYN6VHz9MBHWzwOWKz7C0Km_4JFV5HYy9BMCWCEFjdf6LF1RhXM7aJvfCk652epftOxWkF79eB_ZiMflYw-yUp1FI0JvTq4NdDh4Bp5wAydnANtc_rfILS2ZUoWfiD8pk2jyXLMwvhw3qf2cDufidRkhDYr6UaBBR2TlmtgOoJibTVDJmYvcc6ra" />
+          </div>
+          <div class="flex text-yellow-500 mb-4">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+          </div>
+          <p class="italic text-stone-600 dark:text-stone-400 mb-4 leading-relaxed">"Best croissants in town, hands down. Reminds me exactly of the bakeries I visited in Paris."</p>
+          <span class="font-bold text-stone-900 dark:text-stone-100">— David Miller</span>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="mb-6">
+            <img alt="Emma W." class="w-20 h-20 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxcWlYhbSuWbrVnbMbIJNNvO77gZcjJkptV4kH15tM195UqUS-FINxPSsly3oF9ND0K3Nz0Jc__kwu0FYcHHgvdGJVFC8krqD_z8TPPAPlH7tQArocWdPI8rxvQ2SqSSspakzvQ6GGiaAfCp8oPd6KI-r1sgbMOqmh1APbRyDsLSQOZ12V6XvZ99RZfkwuxfYhXYjws0thgitAq80_RfQHpNUwnOlG1h3Luf5sKUP-FIKXT7OcsfWWXyl25LaMYwy6Xlt09m8Qd6W1" />
+          </div>
+          <div class="flex text-yellow-500 mb-4">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+          </div>
+          <p class="italic text-stone-600 dark:text-stone-400 mb-4 leading-relaxed">"I order their cookie tins for all my corporate gifts. They're always a hit with the clients!"</p>
+          <span class="font-bold text-stone-900 dark:text-stone-100">— Emma Wilson</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer class="bg-stone-100 dark:bg-stone-900/80 pt-16 pb-8 border-t border-stone-200 dark:border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="col-span-1 md:col-span-1">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-icons text-primary text-2xl">bakery_dining</span>
+            <span class="font-display text-xl font-bold text-primary italic">Delightful Bites</span>
+          </div>
+          <p class="text-stone-500 dark:text-stone-400 mb-6 leading-relaxed">Spreading happiness one bite at a time. Visit our local shop for freshly baked goodness daily.</p>
+          <div class="flex gap-4">
+            <a class="w-10 h-10 rounded-full bg-stone-200 dark:bg-stone-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+              <i class="material-icons text-lg">facebook</i>
+            </a>
+            <a class="w-10 h-10 rounded-full bg-stone-200 dark:bg-stone-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+              <i class="material-icons text-lg">camera_alt</i>
+            </a>
+            <a class="w-10 h-10 rounded-full bg-stone-200 dark:bg-stone-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+              <i class="material-icons text-lg">whatsapp</i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6">Quick Links</h4>
+          <ul class="space-y-4 text-stone-500 dark:text-stone-400">
+            <li><a class="hover:text-primary transition-colors" href="#">Our Menu</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Special Orders</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Wedding Cakes</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Bakery Classes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6">Store Info</h4>
+          <ul class="space-y-4 text-stone-500 dark:text-stone-400">
+            <li class="flex items-start gap-3">
+              <span class="material-icons text-primary text-sm mt-1">location_on</span>
+              <span>123 Baker Street, Onitsha, Anambra</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-icons text-primary text-sm">call</span>
+              <span>+234 1234 567 890</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-icons text-primary text-sm">schedule</span>
+              <span>Mon - Sun: 7:00 AM - 8:00 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-stone-200 dark:border-stone-800 text-center text-stone-500 dark:text-stone-400 text-sm">
+        <p>© 2026 Delightful Bites. All rights reserved. Artisanally crafted for your enjoyment.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="fixed bottom-8 right-8 z-[60] flex flex-col items-center">
+    <div class="mb-[-8px] z-10">
+      <span class="bg-sale-red text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full shadow-lg border-2 border-white dark:border-stone-900 uppercase whitespace-nowrap">For Sale</span>
+    </div>
+    <a class="bg-whatsapp text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center ring-4 ring-white/20" href="#sales-modal">
+      <span class="material-icons text-4xl">chat</span>
+    </a>
+  </div>
+  
+  <div class="fixed inset-0 z-[100] hidden bg-stone-900/60 backdrop-blur-sm items-center justify-center p-4" id="sales-modal">
+    <div class="bg-background-light dark:bg-background-dark w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative">
+      <a class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors" href="#">
+        <span class="material-icons">close</span>
+      </a>
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="material-icons text-primary text-3xl">shopping_cart</span>
+          </div>
+          <h2 class="font-display text-3xl font-bold text-primary mb-2">Purchase This Website</h2>
+          <p class="text-stone-500 dark:text-stone-400">Own this professional bakery template today.</p>
+        </div>
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 gap-4">
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Clean &amp; Professional UI</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Custom Admin Dashboard</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Fully Responsive Design</span>
+            </div>
+          </div>
+          <div class="bg-primary/5 dark:bg-white/5 border border-primary/20 rounded-xl p-6 text-center">
+            <p class="text-stone-500 dark:text-stone-400 text-sm uppercase tracking-widest mb-1">Asking Price</p>
+            <p class="text-4xl font-display font-bold text-primary">₦250,000</p>
+          </div>
+          <div class="p-4 bg-stone-100 dark:bg-stone-800 rounded-lg border border-stone-200 dark:border-stone-700">
+            <div class="flex items-center gap-2 mb-3 text-stone-900 dark:text-stone-100 font-bold">
+              <span class="material-icons text-sm">lock</span>
+              <span>Admin Access</span>
+            </div>
+            <div class="space-y-1 text-sm text-stone-600 dark:text-stone-400">
+              <p>Username: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1 rounded">admin</span></p>
+              <p>Password: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1 rounded">admin123</span></p>
+            </div>
+            <a class="mt-3 inline-block text-primary font-bold hover:underline" href="/login">Go to Admin Login →</a>
+          </div>
+          <a class="w-full bg-whatsapp text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-opacity" href="https://wa.me/2348022839391" target="_blank">
+            <span class="material-icons">chat</span>
+            Contact on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
