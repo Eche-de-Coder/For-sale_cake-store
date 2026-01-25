@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Admin Product Management</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#78350f", // Deep warm brown
+            "background-light": "#fffaf3", // Warm cream
+            "background-dark": "#1a1310", // Dark chocolate
+            "accent": "#d97706", // Amber
+            "whatsapp": "#25D366",
+            "sale-red": "#EF4444",
+          },
+          fontFamily: {
+            display: ["Playfair Display", "serif"],
+            sans: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.75rem",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    #password-modal:target {
+      display: flex;
+    }
+    #sales-modal:target {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
+  <header class="bg-white dark:bg-zinc-900 border-b border-orange-100 dark:border-zinc-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-3xl">bakery_dining</span>
+        <h1 class="font-display text-2xl text-primary dark:text-orange-200">Delightful Bites</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-4">
+          <div class="text-right hidden sm:block">
+            <p class="text-xs text-slate-500 dark:text-zinc-400 font-medium uppercase tracking-wider">Logged in as</p>
+            <p class="font-semibold text-slate-700 dark:text-zinc-200 leading-tight">Welcome, Admin</p>
+          </div>
+          <a class="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-sm hover:bg-zinc-800 transition-colors cursor-pointer" href="#password-modal" title="Change Password">
+            A
+          </a>
+          <button class="bg-white dark:bg-zinc-800 p-3 rounded-full shadow-lg border border-orange-100 dark:border-zinc-700 text-primary dark:text-orange-200 hover:scale-110 transition-transform" onclick="document.documentElement.classList.toggle('dark')">
+            <span class="material-symbols-outlined block dark:hidden">dark_mode</span>
+            <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+          </button>
+        </div>
+        <div class="h-8 w-px bg-orange-100 dark:bg-zinc-800 hidden sm:block"></div>
+        <a href="/login" class="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/20 text-primary dark:text-orange-200 dark:border-orange-200/20 hover:bg-primary/5 dark:hover:bg-white/5 transition-colors font-medium text-sm">
+          <span class="material-symbols-outlined text-lg">logout</span>
+          <span class="hidden sm:inline">Logout</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" id="password-modal">
+    <div class="bg-[#fffaf3] dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl border border-orange-100 dark:border-zinc-800 overflow-hidden transform transition-all">
+      <div class="p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="material-symbols-outlined text-accent text-3xl">lock_reset</span>
+          <h2 class="text-2xl font-display text-slate-800 dark:text-white">Change Admin Password</h2>
+        </div>
+        <form id="passwordForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-1.5" for="email">Current Email :</label>
+            <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3" id="email" name="email" placeholder="admin@delightfulbites.com" type="email" />
+          </div>
+          
+          <div class="password-field-wrapper">
+            <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-1.5" for="oldPassword">Old Password :</label>
+            <div class="relative group">
+              <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3 pr-12" id="oldPassword" name="oldPassword" placeholder="********" type="password" />
+              <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary dark:text-zinc-500 dark:hover:text-orange-200 transition-colors px-1" onclick="const input = this.previousElementSibling; input.type = input.type === 'password' ? 'text' : 'password'; const icon = this.querySelector('.material-symbols-outlined'); icon.textContent = input.type === 'password' ? 'visibility' : 'visibility_off';" type="button">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="password-field-wrapper">
+            <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-1.5" for="newPassword">New Password :</label>
+            <div class="relative group">
+              <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3 pr-12" id="newPassword" name="newPassword" placeholder="********" type="password" />
+              <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary dark:text-zinc-500 dark:hover:text-orange-200 transition-colors px-1" onclick="const input = this.previousElementSibling; input.type = input.type === 'password' ? 'text' : 'password'; const icon = this.querySelector('.material-symbols-outlined'); icon.textContent = input.type === 'password' ? 'visibility' : 'visibility_off';" type="button">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="password-field-wrapper">
+            <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-1.5" for="confirmPassword">Confirm New Password :</label>
+            <div class="relative group">
+              <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3 pr-12" id="confirmPassword" name="confirmPassword" placeholder="********" type="password" />
+              <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary dark:text-zinc-500 dark:hover:text-orange-200 transition-colors px-1" onclick="const input = this.previousElementSibling; input.type = input.type === 'password' ? 'text' : 'password'; const icon = this.querySelector('.material-symbols-outlined'); icon.textContent = input.type === 'password' ? 'visibility' : 'visibility_off';" type="button">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+            </div>
+          </div>
+          
+          <p class="text-sm font-medium text-red-600/90 dark:text-red-400/90 mt-2" id="passwordStatus"></p>
+          <div class="flex items-center gap-3 pt-4">
+            <a class="flex-1 text-center py-3 px-6 rounded-xl border border-orange-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 font-semibold hover:bg-orange-50 dark:hover:bg-zinc-800 transition-colors" href="#">
+              Cancel
+            </a>
+            <button class="flex-1 bg-primary hover:bg-zinc-800 text-white py-3 px-6 rounded-xl font-bold transition-all shadow-lg shadow-primary/20" type="submit">
+              Update Password
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <section class="mb-16">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="material-symbols-outlined text-accent text-3xl">add_circle</span>
+        <h2 class="text-3xl font-display text-slate-800 dark:text-white">Add New Product</h2>
+      </div>
+      <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl shadow-orange-900/5 dark:shadow-none border border-orange-100 dark:border-zinc-800 p-6 sm:p-10">
+        <form id="productForm" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="col-span-1 md:col-span-2">
+              <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2" for="name">Product Name</label>
+              <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3" id="name" name="name" placeholder="e.g. Artisanal Sourdough" type="text" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2" for="min-price">Min Price (₦)</label>
+                <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3 text-center md:text-left" id="priceMin" name="min-price" placeholder="0.00" type="number" />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2" for="max-price">Max Price (₦)</label>
+                <input class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3 text-center md:text-left" id="priceMax" name="max-price" placeholder="0.00" type="number" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2" for="category">Category</label>
+              <select class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3" id="category" name="category">
+                <option value="">Select Category</option>
+                <option value="breads">Breads</option>
+                <option value="pastries">Pastries</option>
+                <option value="cakes">Cakes</option>
+                <option value="cookies">Cookies</option>
+              </select>
+            </div>
+            <div class="col-span-1 md:col-span-2">
+              <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2" for="description">Description</label>
+              <textarea class="w-full rounded-xl border-orange-100 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-primary focus:border-primary transition-all p-3" id="description" name="description" placeholder="Describe the ingredients, taste, and texture..." rows="4"></textarea>
+            </div>
+            <div class="col-span-1 md:col-span-2">
+              <label class="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2">Product Image</label>
+              <div class="relative group">
+                <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-orange-200 dark:border-zinc-700 border-dashed rounded-xl bg-orange-50/30 dark:bg-zinc-800/50 hover:bg-orange-50 dark:hover:bg-zinc-800 transition-all cursor-pointer" id="upload-placeholder">
+                  <div class="space-y-1 text-center">
+                    <span class="material-symbols-outlined text-5xl text-orange-400 group-hover:text-primary transition-colors">image</span>
+                    <div class="flex text-sm text-slate-600 dark:text-zinc-400 justify-center">
+                      <label class="relative cursor-pointer rounded-md font-medium text-primary hover:text-accent focus-within:outline-none" for="image">
+                        <span>Upload a file</span>
+                        <input class="sr-only" id="image" name="file-upload" onchange="const file = this.files[0]; if(file){ const reader = new FileReader(); reader.onload = (e) =&gt; { document.getElementById('preview-img').src = e.target.result; document.getElementById('upload-placeholder').classList.add('hidden'); document.getElementById('image-preview').classList.remove('hidden'); }; reader.readAsDataURL(file); }" type="file" />
+                      </label>
+                      <p class="pl-1">or drag and drop</p>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-zinc-500">PNG, JPG, GIF up to 10MB</p>
+                  </div>
+                </div>
+                <div class="hidden relative h-64 w-full rounded-xl overflow-hidden border-2 border-orange-100 dark:border-zinc-700 shadow-inner group" id="image-preview">
+                  <img alt="Product preview" class="w-full h-full object-cover" id="preview-img" src="" />
+                  <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <label class="cursor-pointer bg-white text-primary px-6 py-2 rounded-full font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2" for="file-upload">
+                      <span class="material-symbols-outlined text-lg">cached</span>
+                      Change Image
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 flex justify-center md:justify-end">
+            <div class="flex-1 w-full sm:w-auto h-[54px] px-4 rounded-xl border border-emerald-100 dark:border-emerald-900/30 bg-emerald-50/50 dark:bg-emerald-900/10 flex items-center gap-3">
+              <span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-xl">check_circle</span>
+              <p id="status" class="text-sm font-medium text-emerald-700 dark:text-emerald-400">Ready to add new product</p>
+            </div>
+            <button class="bg-primary hover:bg-zinc-800 text-white px-12 py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0" type="submit">
+              Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+    
+    <section>
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-accent text-3xl">inventory_2</span>
+          <h2 class="text-3xl font-display text-slate-800 dark:text-white">Existing Products</h2>
+        </div>
+        <span class="text-sm font-medium text-slate-500 bg-white dark:bg-zinc-900 px-3 py-1 rounded-full border border-orange-100 dark:border-zinc-800">
+          <p id="productCount">Total: 3 Products</p>
+        </span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productList">
+        <div class="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-orange-100 dark:border-zinc-800">
+          <div class="aspect-video relative overflow-hidden bg-orange-100 dark:bg-zinc-800">
+            <img alt="Sourdough Bread" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtkeiuQdNPIRdOuV8ohgFeFg1avZvKK8RrtFoo6kT1gRh2pdETJRiP457yoU8GFRZ1hWc8TOg3ozf4Ixne0ReipuGT8TsmydJGh_Rkd73vEHvIfNXwy8I5dSALecahaZ4kX1-hAsXMNwDR5ymeHs1aV2jv0JfnHYqFaWEBvcvThWjOGSxvEQxVP-EDXB5ouY5RyVqmetjWIIVscLpO4fvVIibKb6SFfshXq7qGHtMJfh5n_zNrw7ujIGmiwIi0irZdIeo4MGx8L5my" />
+            <div class="absolute top-3 right-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-primary">
+              BREADS
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-display text-xl text-slate-800 dark:text-white">Artisanal Sourdough</h3>
+              <span class="font-bold text-primary">₦8.50</span>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-zinc-400 line-clamp-2 mb-4">Fermented for 24 hours using traditional methods. Crispy crust and airy interior.</p>
+            <div class="grid grid-cols-2 gap-3 pt-2 border-t border-orange-50 dark:border-zinc-800">
+              <button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-orange-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 hover:bg-orange-50 dark:hover:bg-zinc-800 transition-colors font-medium">
+                <span class="material-symbols-outlined text-sm">edit</span>
+                Edit
+              </button>
+              <button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-red-100 text-red-600 hover:bg-red-50 transition-colors font-medium">
+                <span class="material-symbols-outlined text-sm">delete</span>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-orange-100 dark:border-zinc-800">
+          <div class="aspect-video relative overflow-hidden bg-orange-100 dark:bg-zinc-800">
+            <img alt="Butter Croissants" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-MrKH0Z358LvcL1zFphi9DOkPDsPODORJyppuSWrGdBEZ_lewT0Rx4TU9xu7xRfl6dyGQBEo7MG7xqzTXxWiH1eRMw0_GaK2uGi_jrsyJJqhoYFY1r9Oa6_hkAITbOqFDcmDH5SPMLEMQ4UUlzJIKHNA0njbpn_OhWBQD8-2HMMIoFYu89rwMcWdFB8w8bv5NEOh_7XGcpVny5iLIlEnAwa6dLBUJW8131T5fouxH7a-5mLn9qsIbIGlQ99HECV5uzJppxbtL90-E" />
+            <div class="absolute top-3 right-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-primary">
+              PASTRIES
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-display text-xl text-slate-800 dark:text-white">Golden Croissant</h3>
+              <span class="font-bold text-primary">₦4.25</span>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-zinc-400 line-clamp-2 mb-4">Buttery, flaky, and golden brown layers. Made with premium French butter.</p>
+            <div class="grid grid-cols-2 gap-3 pt-2 border-t border-orange-50 dark:border-zinc-800">
+              <button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-orange-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 hover:bg-orange-50 dark:hover:bg-zinc-800 transition-colors font-medium">
+                <span class="material-symbols-outlined text-sm">edit</span>
+                Edit
+              </button>
+              <button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-red-100 text-red-600 hover:bg-red-50 transition-colors font-medium">
+                <span class="material-symbols-outlined text-sm">delete</span>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-orange-100 dark:border-zinc-800">
+          <div class="aspect-video relative overflow-hidden bg-orange-100 dark:bg-zinc-800">
+            <img alt="Chocolate Cake" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBzMyP10W1DbBaDTbU3s6WAd1y_LfwABhjZKw44vw7fiWl3r-uKoYeZYJDymp3n0b6_7Oq9Euc1FaE1OEvrpO4nVMCJ53cEeBZe4EZrWGWBtGuiI02SRqJF9duq5h8lcVMwZwaouHg9PShnCzQU6aQ_Yx_1Y1RHZVKVA0K9HOd5QGmJmhtMNJjB_Tx63KRvoztZVWrWlIey6zvrQ0UiFVal3u-hKUb-yW2mp3sBMUfvkXLOyROGlYwzFC81wBNhgmJFDKY9PLxZ1Gi" />
+            <div class="absolute top-3 right-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-primary">
+              CAKES
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-display text-xl text-slate-800 dark:text-white">Velvet Dark Choco</h3>
+              <span class="font-bold text-primary">₦35.00</span>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-zinc-400 line-clamp-2 mb-4">Rich 70% dark chocolate ganache with moist sponge layers.</p>
+            <div class="grid grid-cols-2 gap-3 pt-2 border-t border-orange-50 dark:border-zinc-800">
+              <button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-orange-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 hover:bg-orange-50 dark:hover:bg-zinc-800 transition-colors font-medium">
+                <span class="material-symbols-outlined text-sm">edit</span>
+                Edit
+              </button>
+              <button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-red-100 text-red-600 hover:bg-red-50 transition-colors font-medium">
+                <span class="material-symbols-outlined text-sm">delete</span>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </main>
+  <footer class="mt-20 py-10 border-t border-orange-100 dark:border-zinc-800 text-center">
+    <p class="text-slate-500 dark:text-zinc-500 text-sm">
+      © 2026 Delightful Bites Admin Portal. All rights reserved.
+    </p>
+  </footer>
+  
+  <div class="fixed bottom-8 right-8 z-[60] flex flex-col items-center">
+    <div class="mb-[-8px] z-10">
+      <span class="bg-sale-red text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full shadow-lg border-2 border-white dark:border-stone-900 uppercase whitespace-nowrap">For Sale</span>
+    </div>
+    <a class="bg-whatsapp text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center ring-4 ring-white/20" href="#sales-modal">
+      <span class="material-icons text-4xl">chat</span>
+    </a>
+  </div>
+  
+  <div class="fixed inset-0 z-[100] hidden bg-stone-900/60 backdrop-blur-sm items-center justify-center p-4" id="sales-modal">
+    <div class="bg-background-light dark:bg-background-dark w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative">
+      <a class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors" href="#">
+        <span class="material-icons">close</span>
+      </a>
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="material-icons text-primary text-3xl">shopping_cart</span>
+          </div>
+          <h2 class="font-display text-3xl font-bold text-primary mb-2">Purchase This Website</h2>
+          <p class="text-stone-500 dark:text-stone-400">Own this professional bakery template today.</p>
+        </div>
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 gap-4">
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Clean &amp; Professional UI</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Custom Admin Dashboard</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Fully Responsive Design</span>
+            </div>
+          </div>
+          <div class="bg-primary/5 dark:bg-white/5 border border-primary/20 rounded-xl p-6 text-center">
+            <p class="text-stone-500 dark:text-stone-400 text-sm uppercase tracking-widest mb-1">Asking Price</p>
+            <p class="text-4xl font-display font-bold text-primary">₦250,000</p>
+          </div>
+          <div class="p-4 bg-stone-100 dark:bg-stone-800 rounded-lg border border-stone-200 dark:border-stone-700">
+            <div class="flex items-center gap-2 mb-3 text-stone-900 dark:text-stone-100 font-bold">
+              <span class="material-icons text-sm">lock</span>
+              <span>Admin Access</span>
+            </div>
+            <div class="space-y-1 text-sm text-stone-600 dark:text-stone-400">
+              <p>Username: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1 rounded">admin</span></p>
+              <p>Password: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1 rounded">admin123</span></p>
+            </div>
+            <a class="mt-3 inline-block text-primary font-bold hover:underline" href="/login">Go to Admin Login →</a>
+          </div>
+          <a class="w-full bg-whatsapp text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-opacity" href="https://wa.me/2348022839391" target="_blank">
+            <span class="material-icons">chat</span>
+            Contact on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+
+</html>
