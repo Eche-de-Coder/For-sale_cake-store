@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Admin Login</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#4a3728",
+            "background-light": "#FFFDF5", // Soft Cream
+            "background-dark": "#1A1614", // Deep Chocolate Black
+            "milky": "#fcf7f3",
+            "accent": "#6e513a",
+            "whatsapp": "#25D366",
+             "sale-red": "#EF4444",
+          },
+          fontFamily: {
+            "display": ["Playfair Display", "serif"],
+            "sans": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "2xl": "2rem"
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+            .glass-card {
+                background: rgba(255, 255, 255, 0.65);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+            .bakery-gradient {
+                background: radial-gradient(circle at top right, #fdfbf9, #f4ede6);
+            }
+        }
+        #sales-modal:target {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-milky min-h-screen flex flex-col relative overflow-x-hidden bakery-gradient">
+  <div class="fixed top-[-10%] right-[-5%] w-[60%] md:w-[40%] h-[40%] bg-primary/5 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
+  <div class="fixed bottom-[-10%] left-[-5%] w-[60%] md:w-[40%] h-[40%] bg-primary/5 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
+  <main class="flex-1 flex items-center justify-center p-4 sm:p-6 z-10">
+    <div class="glass-card w-[90%] sm:w-full max-w-[450px] rounded-2xl shadow-[0_20px_50px_rgba(74,55,40,0.12)] p-10 sm:p-12 flex flex-col gap-8">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-primary text-5xl md:text-6xl">bakery_dining</span>
+        </div>
+        <h1 class="font-display text-primary text-3xl md:text-4xl mb-2">Admin Portal</h1>
+        <p class="text-primary/60 text-sm font-medium">Please sign in to manage your kitchen.</p>
+      </div>
+      <form class="flex flex-col gap-6" onsubmit="return false;">
+        <div class="flex flex-col gap-2">
+          <label class="text-primary/80 text-[10px] md:text-xs font-bold uppercase tracking-widest ml-1" for="email">Email Address or Username</label>
+          <div class="relative">
+            <input class="form-input block w-full rounded-xl border-primary/10 bg-white/50 h-12 md:h-13 px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all text-primary placeholder:text-primary/30" id="email" placeholder="chef@bakery.com" type="text" />
+            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 text-xl">alternate_email</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-primary/80 text-[10px] md:text-xs font-bold uppercase tracking-widest ml-1" for="password">Password</label>
+          <div class="relative">
+            <input class="form-input block w-full rounded-xl border-primary/10 bg-white/50 h-12 md:h-13 px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all text-primary placeholder:text-primary/30" id="password" placeholder="••••••••" type="password" />
+            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 text-xl">lock</span>
+          </div>
+          <div class="flex justify-center sm:justify-end mt-1">
+            <a class="text-sm font-semibold text-primary/70 hover:text-primary transition-colors underline decoration-primary/10 p-2 sm:p-0" href="#">Forgot Password?</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 py-1">
+          <input class="rounded border-primary/20 text-primary focus:ring-primary/30 w-5 h-5 bg-white/60" id="remember" type="checkbox" />
+          <label class="text-sm text-primary/70 font-medium cursor-pointer" for="remember">Keep me logged in</label>
+        </div>
+        <p class="text-sm font-medium text-red-600/90 dark:text-red-400/90 mt-2" id="error"></p>
+        <button class="w-full h-14 bg-primary hover:bg-[#3d2d21] text-white rounded-xl font-bold text-base shadow-xl shadow-primary/20 transition-all active:scale-[0.98] mt-2 flex items-center justify-center gap-2">
+          Sign Into Dashboard
+          <span class="material-symbols-outlined text-xl">login</span>
+        </button>
+      </form>
+    </div>
+  </main>
+  <footer class="relative z-10 w-full p-8 mt-auto">
+    <div class="max-w-[1200px] mx-auto flex flex-col items-center justify-between gap-8 border-t border-primary/10 pt-8 lg:flex-row">
+      <div class="flex items-center gap-2 text-primary/40 order-2 lg:order-1">
+        <span class="material-symbols-outlined text-xl">copyright</span>
+        <p class="text-sm">2024 Bakery Admin Management</p>
+      </div>
+      <nav class="flex flex-col items-center gap-6 sm:flex-row sm:gap-8 order-1 lg:order-2">
+        <a class="group flex items-center gap-3 py-2 px-4 rounded-lg bg-primary/5 sm:bg-transparent sm:p-0 sm:gap-2 text-primary/60 hover:text-primary transition-colors" href="/index.html">
+          <span class="material-symbols-outlined text-xl sm:text-lg">public</span>
+          <span class="text-sm font-semibold">Back to Website</span>
+        </a>
+        <a class="group flex items-center gap-3 py-2 px-4 rounded-lg bg-primary/5 sm:bg-transparent sm:p-0 sm:gap-2 text-primary/60 hover:text-primary transition-colors" href="https://wa.me/2348022839391">
+          <span class="material-symbols-outlined text-xl sm:text-lg">contact_support</span>
+          <span class="text-sm font-semibold">Support Center</span>
+        </a>
+        <a class="group flex items-center gap-3 py-2 px-4 rounded-lg bg-primary/5 sm:bg-transparent sm:p-0 sm:gap-2 text-primary/60 hover:text-primary transition-colors" href="https://wa.me/2348022839391">
+          <span class="material-symbols-outlined text-xl sm:text-lg">shield_person</span>
+          <span class="text-sm font-semibold">Security</span>
+        </a>
+      </nav>
+    </div>
+  </footer>
+  
+  <div class="fixed bottom-8 right-8 z-[60] flex flex-col items-center">
+    <div class="mb-[-8px] z-10">
+      <span class="bg-sale-red text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full shadow-lg border-2 border-white dark:border-stone-900 uppercase whitespace-nowrap">For Sale</span>
+    </div>
+    <a class="bg-whatsapp text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center ring-4 ring-white/20" href="#sales-modal">
+      <span class="material-icons text-4xl">chat</span>
+    </a>
+  </div>
+  
+  <div class="fixed inset-0 z-[100] hidden bg-stone-900/60 backdrop-blur-sm items-center justify-center p-4" id="sales-modal">
+    <div class="bg-background-light dark:bg-background-dark w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative">
+      <a class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors" href="#">
+        <span class="material-icons">close</span>
+      </a>
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="material-icons text-primary text-3xl">shopping_cart</span>
+          </div>
+          <h2 class="font-display text-3xl font-bold text-primary mb-2">Purchase This Website</h2>
+          <p class="text-stone-500 dark:text-stone-400">Own this professional bakery template today.</p>
+        </div>
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 gap-4">
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Clean &amp; Professional UI</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Custom Admin Dashboard</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-800/50 rounded-lg">
+              <span class="material-symbols-outlined text-whatsapp">check_circle</span>
+              <span class="font-medium">Fully Responsive Design</span>
+            </div>
+          </div>
+          <div class="bg-primary/5 dark:bg-white/5 border border-primary/20 rounded-xl p-6 text-center">
+            <p class="text-stone-500 dark:text-stone-400 text-sm uppercase tracking-widest mb-1">Asking Price</p>
+            <p class="text-4xl font-display font-bold text-primary">₦250,000</p>
+          </div>
+          <div class="p-4 bg-stone-100 dark:bg-stone-800 rounded-lg border border-stone-200 dark:border-stone-700">
+            <div class="flex items-center gap-2 mb-3 text-stone-900 dark:text-stone-100 font-bold">
+              <span class="material-icons text-sm">lock</span>
+              <span>Admin Access</span>
+            </div>
+            <div class="space-y-1 text-sm text-stone-600 dark:text-stone-400">
+              <p>Username: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1 rounded">admin</span></p>
+              <p>Password: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1 rounded">admin123</span></p>
+            </div>
+          </div>
+          <a class="w-full bg-whatsapp text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-opacity" href="https://wa.me/2348022839391" target="_blank">
+            <span class="material-icons">chat</span>
+            Contact on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorEl = document.getElementById('error');
+      
+      if (!email || !password) {
+        errorEl.innerHTML = "Please fill all fields";
+        return;
+      }
+      
+      const adminEmail = 'admin';
+      const adminPassword = 'admin123';
+      if (email === adminEmail && password === adminPassword) {
+        window.location.href = '/admin';
+      } else {
+        errorEl.innerHTML = 'Invalid email or password';
+      }
+    });
+  </script>
+  
+</body>
+
+</html>
