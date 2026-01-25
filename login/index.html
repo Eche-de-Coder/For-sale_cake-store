@@ -167,8 +167,8 @@
               <span>Admin Access</span>
             </div>
             <div class="space-y-1 text-xs md:text-sm text-stone-600 dark:text-stone-400">
-              <p>User: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1.5 py-0.5 rounded">admin</span></p>
-              <p>Pass: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1.5 py-0.5 rounded">admin123</span></p>
+              <p>Username: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1.5 py-0.5 rounded">admin</span></p>
+              <p>Password: <span class="font-mono bg-stone-200 dark:bg-stone-700 px-1.5 py-0.5 rounded">admin123</span></p>
             </div>
           </div>
           <a class="w-full bg-whatsapp text-white py-3 md:py-4 rounded-xl font-bold text-base md:text-lg flex items-center justify-center gap-2 md:gap-3 hover:opacity-90 transition-opacity" href="https://wa.me/2348022839391" target="_blank">
@@ -197,7 +197,7 @@
       const adminEmail = 'admin';
       const adminPassword = 'admin123';
       if (email === adminEmail && password === adminPassword) {
-        window.location.href = '/admin';
+        window.location.href = './admin';
       } else {
         errorEl.innerHTML = 'Invalid email or password';
       }
